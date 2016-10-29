@@ -27,10 +27,10 @@ module testConditioner();
     // Be sure to test each of the three conditioner functions:
     // Synchronization, Debouncing, Edge Detection
 
-    reg[0:69] noisy;
-    reg[0:69] expected;
-    reg[0:69] expected_positiveedge;
-    reg[0:69] expected_negativeedge;
+    reg[0:119] noisy;
+    reg[0:119] expected;
+    reg[0:119] expected_positiveedge;
+    reg[0:119] expected_negativeedge;
     reg expectedWire;
     reg dutPassed;
 
@@ -42,12 +42,14 @@ module testConditioner();
 
         dutPassed = 1;
         // clock = 70'b0101010101010101010101010101010101010101010101010101010101010101010101;
-        noisy    = 70'b0000000000111111111111111111110000000000000000001011111111111111111111;
+        // noisy    = 70'b0000000000111111111111111111110000000000000000001011111111111111111111;
         expected = 70'bxxxxxxx000000000000001111111111111111111100000000000000000011111111111;
         expected_positiveedge = 70'bxxxxxxx000000000000001100000000000000000000000000000000000011000000000;
         expected_negativeedge = 70'bxxxxxxxxx0000000000000000000000000000000011000000000000000000000000000;
 
-        for (i = 0; i < 70; i=i+1) begin
+        noisy    = 120'b000000000000000000000000000000000000000000000001010101010101010101010101011111111111111111111111111111111111111111111111;
+
+        for (i = 0; i < 120; i=i+1) begin
           pin <= noisy[i];
           expectedWire <= expected[i];
           #10;
